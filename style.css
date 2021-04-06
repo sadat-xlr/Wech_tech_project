@@ -265,18 +265,19 @@ ul{
 /*account*/
 .account{
    padding:50px 0;
+   padding-left:80px;
    background:radial-gradient(#fff,#197d4c);
    
 }
 .form-container{
 	background:#d2f7d9;
-	width:400px;
-	height:600px;
+	width:700px;
+	height:700px;
 	position:relative;
 	text-align:center;
 	padding:20px 0;
 	margin:auto;
-	box-shadow:0 0 20px 0px rgba(0,0,0,.2);
+	box-shadow:0 0 20px 0px rgba(0,0,0,.3);
 	border-radius:20px;
 }
 .form-container span{
@@ -296,11 +297,13 @@ ul{
 	
 }
 .form-container form{
-	max-width:400px;
+	width:100%
 	padding:10px;
 	position:absolute;
 	top:140px;
 }
+
+
 form input{
 	width:100%;
 	height:30px;

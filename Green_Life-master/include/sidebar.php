@@ -1,9 +1,9 @@
 
 <div class="sidebar">
-  <a class="active" href="#home">MENU</a>
-  <a href="">Employee Registration</a>
-  <a href="">Customer Registration</a>
-  <a href="">Manage Category</a>
-  <a href="">Manage Products</a>
-  <a href="">Orders</a>
+  <a class="active">MENU</a>
+  <a href="../admin/addemployee.php">Employee Registration</a>
+  <a href="../admin/addcustomer.php">Customer Registration</a>
+  <a href="../admin/addcategory.php">Manage Category</a>
+  <a href="../admin/addproduct.php">Manage Products</a>
+  <a href="#">Orders</a>
 </div>

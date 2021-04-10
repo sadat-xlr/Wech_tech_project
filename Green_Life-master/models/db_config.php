@@ -9,7 +9,8 @@
   function execute($query){
     global $db_server,$db_user,$db_pass,$db_name ;   
 	$db_con=mysqli_connect($db_server,$db_user,$db_pass,$db_name);	 
-	 mysqli_query($db_con,$query);
+	mysqli_query($db_con,$query);
+
   }
   function get_data($query){
       global $db_server,$db_user,$db_pass,$db_name ;  	  

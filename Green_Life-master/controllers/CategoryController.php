@@ -1,22 +1,38 @@
 
 <?php
-require_once 'models/db_config.php';
+require_once '../models/db_config.php';
 $name="";
 $err_name="";
+$hasError=false;
 if(isset($_POST['btn_addCategory'])){
 	if(empty($_POST['name'])){
+		$hasError=true;
 		$err_name="insert category name";
+	}
+	if(is_numeric($_POST['name'])){
+		$hasError=true;
+		$err_name="insert valid category name";
 	}
 	else{
 
 		$name=htmlspecialchars($_POST['name']);
-		insertCategory($name);
+
 	}
 }
+if(!$hasError){
+	    insertCategory($name);
+	  
+	  }
+
+
+
+
+//update category
+
  function insertCategory($name){
  	$query="insert into categories values(NULL,'$name')";
  	execute($query);
- 	header("Location:allcategories.php");
+ 	
 
  }
   function getCategory($id){

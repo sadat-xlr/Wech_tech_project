@@ -27,13 +27,13 @@
   		$hasError=true;
   		$err_name="field can not be empty ";
   		$err_username="field can not be empty";
-  		$err_email="field can not be empty";
+  		
   		$err_password="field can not be empty";
       $err_phoneno="field can not be empty";
      
      
   	}
-    else if(is_numeric($_POST['name'])||is_numeric($_POST['username']) ||is_numeric($_POST['email']) ||!is_numeric($_POST['phoneno'])){
+    if(is_numeric($_POST['name'])||is_numeric($_POST['username']) ||is_numeric($_POST['email']) ||!is_numeric($_POST['phoneno'])){
       $hasError=true;
       $err_name="field can not be number ";
       $err_username="field can not be number ";
@@ -47,7 +47,8 @@
         $hasError=true;
         $err_dob="*Please select date of birth";
       }
-       
+     
+   
             
 
 
@@ -57,7 +58,10 @@
   		
   		$name=htmlspecialchars($_POST['name']) ;
   		$username=htmlspecialchars($_POST['username']) ;
-  		$email=htmlspecialchars($_POST['email']) ;
+  		
+     
+
+      $email=htmlspecialchars($_POST['email']) ;
       $phoneno=htmlspecialchars($_POST['phoneno']);
     
       $password=htmlspecialchars($_POST['password']) ;
@@ -66,6 +70,9 @@
        $byear=$_POST["year"];
      
   	}
+
+
+
     if(!$hasError){
      
     if (insertUser($name,$username,$password,$email,$phoneno)) {

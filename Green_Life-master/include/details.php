@@ -5,7 +5,7 @@
 			<a href="Products.html" class="btn">Explore Now </a>
 		</div>
 		<div class="col-2">
-			<img src="images/image1.jpg">
+			<img src="../images/image1.jpg">
 		</div>
 	</div>
 	</div>

@@ -63,7 +63,7 @@
 				<p style="color:red"><?php echo $err_dob; ?></p>
 			    <button type="submit" class="btn"  name="sign_up">Register</button><br>
 				  
-				<a style="text-decoration:none;color:green;" href="Login.html">Back To Login</a>
+				<a style="text-decoration:none;color:green;" href="">Back To Login</a>
 			
 			      </form>
 

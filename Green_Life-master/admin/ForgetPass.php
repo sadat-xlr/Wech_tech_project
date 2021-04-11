@@ -26,8 +26,8 @@
 				
 				<button type="submit" class="btn" name="btn_submit">Submit</button>
 				<a href="dashboard.php">Back to Home</a><span> | </span>
-				<a href="Login.html">Login</a><br><br>
-				<a style="text-decoration:none" href="#">Create New Account</a>
+				<a href="index.php">Login</a><br><br>
+				<a style="text-decoration:none" href="registration.php">Create New Account</a>
 			  </form>
 			   
 			   

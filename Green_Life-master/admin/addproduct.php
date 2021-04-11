@@ -30,7 +30,7 @@
 		     
 		      
 			</select><span style="color: red; font-size: 12;" class="spn"><?php echo $err_category;?></span><br>
-			<span class="spn">Product Details:</span> <textarea placeholder="add Details" name="details" style="height: 60px;width: 120px;"></textarea> <span style="color: red; font-size: 12;" class="spn"> </span><br>
+			<span class="spn">Product Details:</span> <textarea placeholder="add Details" name="details" style="height: 60px;width: 120px;"></textarea> <span style="color: red; font-size: 12;" class="spn"><?php echo $err_details;?> </span><br>
 			
 				
 						

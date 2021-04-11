@@ -13,20 +13,53 @@
 
   $hasError=false;
   if(isset($_POST['btn_addProduct'])){
-  	if(empty($_POST['name'])||empty($_POST['price'])||empty($_POST['details'])||empty($_POST['product_pic'])){
+  	if(empty($_POST['name'])){
        $hasError=true;
        $err_name="insert name";
-       $err_price="insert phone no";
-       $err_pic="insert picture";
-       $err_detail="insert details";
+      
   	}
-  	if(is_numeric($_POST['name'])||!is_numeric($_POST['price'])||is_numeric($_POST['details'])){
+    if(empty($_POST['price'])){
+       $hasError=true;
+      
+       $err_price="insert price";
+      
+    }
+    if(empty($_POST['details'])){
+       $hasError=true;
+       
+       $err_details="insert details";
+    }
+    if(empty($_POST['product_pic'])){
+       $hasError=true;
+      
+       $err_pic="insert picture";
+       
+    }
+
+
+
+
+
+  	if(is_numeric($_POST['name'])){
        $hasError=true;
        $err_name="insert valid name";
+      
+  	}
+    if(!is_numeric($_POST['price'])){
+       $hasError=true;      
        $err_price="insert valid price";
       
+      
+    }
+    if(is_numeric($_POST['details'])){
+       $hasError=true;
+      
+      
        $err_details="insert valid details";
-  	}
+    }
+
+
+
   	if($_POST['category']==""){
   		$hasError=true;
   		$err_category="category not selected";
@@ -53,7 +86,7 @@
       $data = trim($data);
       $data = stripslashes($data);
       $data = htmlspecialchars($data);
-return $data;
+      return $data;
 }
 
  

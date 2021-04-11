@@ -1,6 +1,6 @@
 <?php include '../include/header.php';?>
-<?php include '../include/sidebar.php';?>
 
+<?php include '../include/sidebar.php';?>
 
 
 
@@ -10,11 +10,11 @@
    <div class="account">
 
      <div class="container">
+
         <div class="row" style="height: 650px;">
-	    
-			  <p>aaaaaaaaaaaaaaaaaaaaa</p>
-			 
-			   
+        	
+	       <?php include '../include/details.php';?>
+			
 			   
 			
 		

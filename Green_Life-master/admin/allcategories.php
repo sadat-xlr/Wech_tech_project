@@ -1,32 +1,36 @@
+<?php include '../include/header.php';?>
+<?php include '../include/sidebar.php';?>
+<?php require_once '../controllers/CategoryController.php';
+     $categories=getAllCategory();
+?>
+<title>All Category </title>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>All Category </title>
-</head>
-<body>
-	<?php require_once '../controllers/CategoryController.php';?>
-	<div>
-		<table border="1px" style="text-align: center;">
+	<div style="background:radial-gradient(#fff,#197d4c);">
+		<div style="width: 500px;margin-left: 600px; ">
+		<a style="color: #01661a;" href='addcategory.php' >Add New Category</a>
+		<table border="1px" style="text-align: left; margin-top: 10px; " class="table">
 			
 			<tr>
-		       <th>category Id</th>
+		      
 			   <th>category Name</th>
 			   <th>Action</th>
 			</tr>
      <?php 
      
   
-    	$result=getAllCategory();
-        for($i=0;$i<count($result);$i++)
     	
-    	{
-
-    		echo "<tr>";
-         	echo "<td>".$result[$i]['id']."</td>";
-     	    echo "<td>".$result[$i]['name']."</td>";
+        foreach ($categories as $category) {
+        	echo "<tr>";
+         	
+     	    echo "<td>".$category["name"]."</td>";
+     	    echo '<td><span><a href="editcategory.php?id='.$category["id"].'">Edit</a> | <a href="deletecategory.php?id='.$category["id"].'" >Delete</button></a></span></td>';
      	    echo "</tr>";
-    	}
+        }
+    	
+    	
+
+    		
+    	
      
      
 
@@ -39,6 +43,6 @@
 
 		</table>
 	</div>
-
-</body>
-</html>
+	</div>
+	
+<?php include '../include/footer.php';?>

@@ -42,7 +42,8 @@
 		        <option>AB-</option>
 		       
 			</select><span style="color: red; font-size: 12;" class="spn"><?php echo $err_bloodgrp;?></span><br>
-			<span class="spn">Profile Pic:</span> <input type="file"  name="">		
+			<span class="spn">Profile Pic:</span> 
+			<input type="file"  name="employee_pic"><br><span style="color: red; font-size: 12;" class="spn"><?php echo $err_pic;?></span>	
 						
 				<button type="submit" class="btn" name="btn_add_emp">ADD</button>
 				

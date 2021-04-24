@@ -1,25 +1,25 @@
 <?php include '../include/header.php';?>
 
-<?php include '../include/sidebar.php';?>
+<?php //include '../include/sidebar.php';?>
 <?php require_once '../controllers/ProductController.php';?>
 
 
 
-<div id="emp" style="background:radial-gradient(#fff,#197d4c); " onclick="">
+<div id="emp" style="background:radial-gradient(#fff,#197d4c);">
 	 
 	
    <div class="account">
      <div class="container">
         <div class="row">
 	  
-	       <form action="" method="post">
+	       <form action="" method="post" enctype="multipart/form-data">
 			  
 			<h2>Add Product Details</h2><br>
 			<span class="spn">Product Name:</span> <input type="text" placeholder="Product name" name="name"> <span style="color: red; font-size: 12;" class="spn"> <?php echo $err_name;?></span><br>
 			
 			<span class="spn">Product Price:</span> <input type="text" placeholder="Product price" name="price"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_price;?> </span><br>
 		
-			<span class="spn">Product Pic:</span> <input type="file"  name="product_pic"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_pic;?> </span><br>
+			<span class="spn">Product Pic:</span> <input type="file"  name="product_pic"><span style="color: red; font-size: 12;" class="spn"></span><br>
 			
 			<span class="spn">Categoy</span> 
 			<select name='category'> 

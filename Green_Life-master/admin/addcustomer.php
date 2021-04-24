@@ -20,7 +20,7 @@
 				      <p style="color:red"><?php echo $err_name; ?></p>
 				      <span id="err_name"></span><br>
 				      <span>Username:</span>
-			          <input id="username" type="text" placeholder="Username" name="username">
+			          <input id="username" type="text" placeholder="Username" name="username" onfocusout="checkUser(this)">
 				      <p style="color:red"><?php echo $err_username; ?></p>
 				      <span id="err_username"></span><br>
 				       <span>phone No:</span>
@@ -60,7 +60,7 @@
 												
 								</select>
 				                <select class="cmb" name="year">
-									<option id="Year" value="0">Year</option>
+									<option id="year" value="0">Year</option>
 									<?php for($i=1950;$i<=2021;$i++)
 									 echo "<option value='1'>$i</option>"
 									?>
@@ -88,76 +88,99 @@
 
 
 <script>
+	var unameExists=false;
    function get_element(id){
 		return document.getElementById(id);
 	}
 
 function validateCustomer(){
-    
-     clenup();
-     var hasError=false;
-     if(get_element("name").value==""){ 	
-
-     	
-     	get_element("err_name").innerHTML="Please Enter Name (From JS)";
-     	
-     	get_element("err_name").style.color="red";
-     	hasError=true;
-     	
-     	
-       	
-     }
-     if(get_element("username").value==""){
-     	
-     	get_element("err_username").innerHTML="Please Enter UserName (From JS)";
-     	get_element("err_username").style.color="red";
-     	hasError=true;
-     	
-
-     }
-     if(get_element("phoneno").value==""){
-     	
-     	get_element("err_phoneno").innerHTML="Please Enter PhoneNo (From JS)";
-     	get_element("err_phoneno").style.color="red";
-     	hasError=true;
-     	
-
-     }
-     if(get_element("email").value==""){
-     	
-     	get_element("err_email").innerHTML="Please Enter Email (From JS)";
-     	get_element("err_email").style.color="red";
-     	hasError=true;
-     	
-
-     }
-     if(get_element("password").value==""){
-     	
-     	get_element("err_password").innerHTML="Please Enter Password (From JS)";
-     	get_element("err_password").style.color="red";
-     	hasError=true;
-     	
-
-     }
-    
-
-     if(!hasError){
-     	return true;
-     }
-	
-	return false;
-	}
-	
-
-function clenup(){
-		get_element("err_name").innerHTML="";
-		get_element("err_username").innerHTML="";
-		get_element("err_phoneno").innerHTML="";
-		get_element("err_email").innerHTML="";
-		get_element("err_password").innerHTML="";
-		get_element("err_dob").innerHTML="";
+		var hasError=false;
+     cleanup();
+	if(get_element("name").value==""){
+	  get_element("err_name").innerHTML="Insert name (JS)";
+	  get_element("err_name").style.color="red";
+	  hasError=true;
 		
+	}
+	if(get_element("username").value==""){
+	  get_element("err_username").innerHTML="Insert username (JS)";
+	  get_element("err_username").style.color="red";
+	  hasError=true;
+		
+	}
+	else if(unameExists){
+		hasError=true;
+		get_element("err_username").innerHTML=" username taken (JS)";
+		get_element("err_username").style.color="red";
+	}
 
+	
+	if(get_element("phoneno").value==""){
+	  get_element("err_phoneno").innerHTML="Insert phoneno (JS)";
+	  get_element("err_phoneno").style.color="red";
+	  hasError=true;
+		
+	}
+	else if(isNaN(get_element("phoneno").value)){
+		get_element("err_phoneno").innerHTML="Insert valid phoneno (JS)";
+	  get_element("err_phoneno").style.color="red";
+	  hasError=true;
+	}
+
+	if(get_element("password").value==""){
+	  get_element("err_password").innerHTML="Insert password (JS)";
+	  get_element("err_password").style.color="red";
+	  hasError=true;
+		
+	}
+
+    if(get_element("email").value==""){
+		get_element("err_email").innerHTML="Insert email (JS)";
+		get_element("err_email").style.color="red";
+		hasError=true;
+	}
+
+	
+
+	return !hasError;
+	}
+
+
+	function checkUser(control){
+	var userName=control.value;
+	var xhttp=new XMLHttpRequest();
+	var hasError=false;
+	xhttp.onreadystatechange=function(){
+		if(this.readyState==4 &&this.status==200){
+			//when server respond 
+			var respond=this.responseText.trim();
+			
+			if(respond=="true"){
+				unameExists=false;
+			  get_element("err_username").innerHTML="";
+			}else{
+				unameExists=true;
+				
+				
+			    get_element("err_username").innerHTML="This User name taken";			 
+
+			}
+			
+
+			
+		}
+
+	};
+	xhttp.open("GET","../customer/checkuser.php?username="+userName,true);
+	xhttp.send();
+}
+
+	function cleanup(){
+		get_element("err_name").innerHTML="";
+        get_element("err_username").innerHTML="";
+        get_element("err_phoneno").innerHTML="";
+        get_element("err_password").innerHTML="";
+        get_element("err_email").innerHTML="";
 	}
 
 </script>

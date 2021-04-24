@@ -1,6 +1,7 @@
 <?php
   require_once '../models/db_config.php';
   $name="";
+
   $err_name="";
   $email="";
   $err_email="";
@@ -16,35 +17,69 @@
   $bmonth="";
   $byear="";
   $err_dob="";
-  
+  $type="";
+  $err_type="";
+  $hasError=false;
+ 
     
 
   
 
   //sign up
   if(isset($_POST['sign_up'])){
-  	if(empty($_POST['name'])||empty($_POST['username']) ||empty($_POST['email']) ||empty($_POST['password'])||empty($_POST['phoneno'])){
-  		
-  		$err_name="field can not be empty ";
-  		$err_username="field can not be empty";
-  		
-  		$err_password="field can not be empty";
-      $err_phoneno="field can not be empty";
-     
-     
+  	if(empty($_POST['name'])){
+  		$hasError=true;
+  		$err_name="please insert name";        
   	}
-    if(is_numeric($_POST['name'])||is_numeric($_POST['username']) ||is_numeric($_POST['email']) ||!is_numeric($_POST['phoneno'])){
-   
-      $err_name="field can not be number ";
-      $err_username="field can not be number ";
-      $err_email="field can not be number ";
-     
-      $err_phoneno="ivalid phone";
-     
-     
+    if(empty($_POST['username'])){
+      $hasError=true;
+      $err_username="please insert user name";
+
     }
-     if(($_POST["day"])=="Day"||($_POST["month"])=="Month"||($_POST["year"])=="Year"){
+    if(empty($_POST['email'])){
+      $hasError=true;
+       $err_email="please insert email";
+
+    }
+    if(empty($_POST['password'])){
+      $hasError=true;
+      $err_password="please insert password";
+    }
+    if(empty($_POST['phoneno'])){
+       
+        $hasError=true;
+       $err_phoneno="please insert phoneno";
+    }
+
+
+   
+    if(is_numeric($_POST['name'])){
+       $hasError=true;
+      $err_name="field can not be number";        
+    }
+    if(is_numeric($_POST['username'])){
+       $hasError=true;
+      $err_username="field can not be number";
+
+    }
+    if(is_numeric($_POST['email'])){
+        $hasError=true;
+       $err_email="field can not be number";
+
+    }
+    if(is_numeric($_POST['password'])){
+      $hasError=true;
+      $err_password="field can not be number";
+    }
+    if(!is_numeric($_POST['phoneno'])){
+       $hasError=true;
+       $err_phoneno="inavild number";
+    }
+
+  
+    if(($_POST["day"])=="Day"||($_POST["month"])=="Month"||($_POST["year"])=="Year"){
       
+         $hasError=true;
         $err_dob="*Please select date of birth";
       }
      
@@ -65,30 +100,60 @@
       $phoneno=htmlspecialchars($_POST['phoneno']);
     
       $password=htmlspecialchars($_POST['password']) ;
+     
+      $type=htmlspecialchars($_POST['type']) ;
+     
+     
       $bday=$_POST["day"];
       $bmonth=$_POST["month"];
-       $byear=$_POST["year"];
-       insertUser($name,$username,$password,$email,$phoneno);
+      $byear=$_POST["year"];
+      if(insertUser($name,$username,$password,$email,$phoneno,$type)){
+        $name="" ;
+        $username="" ;
+        $email="" ;
+        $phoneno="";
+        $password="";
+        header("location:../admin/index.php");
+       
+      }
+
      
   	}
+
+
 
 
 
            
 
     }
+ 
    
   
 
 //sign in
   if(isset($_POST['btn_login'])){
-     if(empty($_POST['username'])||empty($_POST['password'])){
+     
+     if(empty($_POST['username'])){
         $err_username="please insert username ";
+        
+     }
+     if(empty($_POST['password'])){
         $err_password="please insert password";
      }
-     if (authenticateUser($_POST['username'],$_POST['password'])) {
-       header("Location:dashboard.php");
-     }else{
+
+     if (authenticateUser($_POST['username'],$_POST['password']) ){
+       $result=authenticateUser($_POST['username'],$_POST['password']);
+       if($result['type']=="user"){
+        header("Location:../customer/index.php");
+       }
+        if($result['type']==""){
+        header("Location:../admin/dashboard.php");
+       }
+       
+     }
+    
+     else{
       if(!empty($_POST['username'])&&!empty($_POST['password']))
        $err_msg ="ivalid username or password";
      }
@@ -122,8 +187,8 @@ function deleteCustomer($id){
 
 
 
-   function insertUser($name,$username,$password,$email,$phoneno){
-      $query="INSERT INTO users VALUES(NULL,'$name','$username','$password','$email','$phoneno')";
+   function insertUser($name,$username,$password,$email,$phoneno,$type){
+      $query="INSERT INTO users VALUES(NULL,'$name','$username','$password','$email',$phoneno,'$type')";
       execute($query);
       return true;
      
@@ -137,7 +202,7 @@ function deleteCustomer($id){
          /*session_start();
          $_SESSION["success"]*/
          
-        return$result[0];;
+        return$result[0];
       }else{
         return false;
       }
@@ -162,6 +227,17 @@ function deleteCustomer($id){
   }
   return false;
 
+ }
+
+ //ajax username
+ function checkUser($username){
+  //change needed
+  $query="SELECT * FROM users WHERE username='$username'";
+  $result=get_data($query);
+  if(count($result)>0){
+    return "false";
+  }
+  return "true";
  }
 
 

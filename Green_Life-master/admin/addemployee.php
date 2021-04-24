@@ -67,6 +67,7 @@
 		
 	
 </div>
+
 <script>
    function get_element(id){
 		return document.getElementById(id);

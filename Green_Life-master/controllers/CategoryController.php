@@ -17,6 +17,7 @@ if(isset($_POST['btn_addCategory'])){
 	else{
 
 		$name=htmlspecialchars($_POST['name']);
+
 		insertCategory($name);
 	    header("location:../admin/allcategories.php");
 

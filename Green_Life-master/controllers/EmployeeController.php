@@ -68,7 +68,7 @@
     $e_type=htmlspecialchars($_POST['e_type']);
     $e_bloodgrp=htmlspecialchars($_POST['e_bloodgrp']);
     insertEmployee($e_name,$e_email,$e_phone,$e_type,$e_bloodgrp);
-    
+    header("location:allemployeedetalis.php");
 
   }
   }
@@ -76,6 +76,12 @@
   if(isset($_POST['btn_deleteEmployee'])){
     
     deleteEmployee($_POST['id']);
+
+  }
+   if(isset($_POST['btn_edit_emp'])){
+    
+    editEmployee($_POST['id'],$_POST['e_name'],$_POST['e_email'],$_POST['e_phone'],$_POST['e_type'],$_POST['e_bloodgrp']);
+    header("location:allemployeedetalis.php");
 
   }
   
@@ -99,8 +105,8 @@
    
    }
    //update category
-function editEmployee($e_name,$e_email,$e_phone,$e_type,$e_bloodgrp){
-    $query = "update categories set name='$name' where id=$id";
+function editEmployee($id,$e_name,$e_email,$e_phone,$e_type,$e_bloodgrp){
+    $query = "update employee set e_name='$e_name',e_email='$e_email',e_phone=$e_phone,e_type='$e_type',e_bloodgrp='$e_bloodgrp' where id=$id";
     execute($query);
     
   }

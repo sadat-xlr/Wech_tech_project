@@ -10,7 +10,7 @@ if(isset($_POST['btn_addCategory'])){
 		
 		$err_name="insert category name";
 	}
-	if(is_numeric($_POST['name'])){
+	else if(is_numeric($_POST['name'])){
 		
 		$err_name="insert valid category name";
 	}
@@ -23,7 +23,8 @@ if(isset($_POST['btn_addCategory'])){
 
 	}
 
-}	   
+}	
+
 	   	  
 if(isset($_POST["btn_editCategory"])){
        editCategory($_POST["id"],$_POST["name"]);
@@ -40,7 +41,7 @@ if(isset($_POST["btn_deleteCategory"])){
        header("location:../admin/allcategories.php");
 
 	}
-	  
+  
 
 
 
@@ -82,7 +83,25 @@ function editCategory($id,$name){
  	return $result;
 
  }
-   
+ //for use of ajax
+  function checkCategory($name){
+  //change needed
+  $query="SELECT * FROM categories WHERE name='$name'";
+  $result=get_data($query);
+  if(count($result)>0){
+  	return "false";
+  }
+  return "true";
+ }
+
+ function searchCategory($name){
+  $query="SELECT * FROM categories WHERE name like '$name%'";
+  $result=get_data($query);
+  if(count($result)>0){
+  	return $result[0];
+  }
+  return false;
+ }
 
 
 ?>

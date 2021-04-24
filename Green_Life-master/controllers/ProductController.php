@@ -11,26 +11,26 @@
   $err_category="";
   $err_details="";
 
-  $hasError=false;
+
   if(isset($_POST['btn_addProduct'])){
   	if(empty($_POST['name'])){
-       $hasError=true;
+       
        $err_name="insert name";
       
   	}
     if(empty($_POST['price'])){
-       $hasError=true;
+       
       
        $err_price="insert price";
       
     }
     if(empty($_POST['details'])){
-       $hasError=true;
+       
        
        $err_details="insert details";
     }
     if(empty($_POST['product_pic'])){
-       $hasError=true;
+    
       
        $err_pic="insert picture";
        
@@ -41,18 +41,18 @@
 
 
   	if(is_numeric($_POST['name'])){
-       $hasError=true;
+       
        $err_name="insert valid name";
       
   	}
     if(!is_numeric($_POST['price'])){
-       $hasError=true;      
+         
        $err_price="insert valid price";
       
       
     }
     if(is_numeric($_POST['details'])){
-       $hasError=true;
+       
       
       
        $err_details="insert valid details";
@@ -61,7 +61,7 @@
 
 
   	if($_POST['category']==""){
-  		$hasError=true;
+  		
   		$err_category="category not selected";
   	}
   	
@@ -75,10 +75,23 @@
     $ext = pathinfo($product_pic, PATHINFO_EXTENSION);
     if(!in_array($ext,$allowed) ) {
     $err_pic = "jpeg only";
+    insertProduct($name,$price,$category,$details);
 }
 
 
   }
+}
+
+if(isset($_POST['btn_updateProduct'])){
+
+  editProduct($_POST['id'],$_POST['name'],$_POST['price'],$_POST['category'],$_POST['details']);
+  header("location:allproducts.php");
+}
+if(isset($_POST["btn_delete_product"])){
+  deleteProduct($_POST['id']);
+  header("location:allproducts.php");
+  
+
 }
 
 
@@ -88,6 +101,46 @@
       $data = htmlspecialchars($data);
       return $data;
 }
+//insert product
+function insertProduct($name,$price,$category,$details){
+    $query="INSERT INTO products VALUES(NULL,'$name',$price,'$category','$details')";
+    execute($query);
+    return true;
+   
+   }
+
+//update product 
+
+   function editProduct($id,$name,$price,$category,$details){
+    $query="update products set name='$name',price=$price,category='$category',details='$details' where id=$id";
+    $result=execute($query);
+    
+   }
+//list product
+   function getAllproducts(){
+    $query="SELECT * from products";
+    $result=get_data($query);
+    return $result;
+
+   }
+//delete productt
+   function deleteProduct($id)
+   {$query="DELETE FROM products where id=$id";
+   execute($query);
+
+
+   }
+//get prodts
+  function getProduct($id){
+    $query="SELECT * from products WHERE id=$id";
+    $result=get_data($query);
+    if(count($result)>0 ){
+      return $result[0];
+    }
+    return false;
+
+  }
+
 
  
 

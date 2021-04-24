@@ -11,14 +11,17 @@
      <div class="container">
         <div class="row">
 	  
-	       <form action="" method="post">
+	       <form action="" method="post" onsubmit="return validateEmployee() ">
 			  
 			<h2>Add Employee Details</h2><br>
-			<span class="spn">Name:</span> <input type="text" placeholder="Product name" name="e_name"> <span style="color: red; font-size: 12;" class="spn"> <?php echo $err_name;?></span><br>
+			<span class="spn">Name:</span> <input id="e_name" type="text" placeholder="Employee Name" name="e_name"> <span style="color: red; font-size: 12;" class="spn"> <?php echo $err_name;?></span><br>
+			<span id="err_name"></span><br>
 			
-			<span class="spn">Email:</span> <input type="text" placeholder="Product name" name="e_email"><span style="color: red; font-size: 12;" class="spn"> <?php echo $err_email;?></span><br>
+			<span class="spn">Email:</span> <input id="e_email" type="text" placeholder="Email" name="e_email"><span style="color: red; font-size: 12;" class="spn"> <?php echo $err_email;?></span><br>
+			<span id="err_email"></span><br>
 		
-			<span class="spn">Phone:</span> <input type="text" placeholder="Product name" name="e_phone"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_phone;?></span><br>
+			<span class="spn">Phone:</span> <input id="e_phone" type="text" placeholder="Phone" name="e_phone"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_phone;?></span><br>
+			<span id="err_phone"></span><br>
 			
 			<span class="spn">Type:</span> 
 			<select name="e_type">
@@ -64,6 +67,68 @@
 		
 	
 </div>
+<script>
+   function get_element(id){
+		return document.getElementById(id);
+	}
+
+function validateEmployee(){
+    
+     clenup();
+     var hasError=false;
+     if(get_element("e_name").value==""){ 	
+
+     	
+     	get_element("err_name").innerHTML="Please Enter Name (From JS)";
+     	
+     	get_element("err_name").style.color="red";
+     	hasError=true;
+     	
+     	
+       	
+     }
+    
+     if(get_element("e_phone").value==""){
+     	
+     	get_element("err_phone").innerHTML="Please Enter PhoneNo (From JS)";
+     	get_element("err_phone").style.color="red";
+     	hasError=true;
+     	
+
+     }
+     if(get_element("e_email").value==""){
+     	
+     	get_element("err_email").innerHTML="Please Enter Email (From JS)";
+     	get_element("err_email").style.color="red";
+     	hasError=true;
+     	
+
+     }
+    
+    
+
+     if(!hasError){
+     	return true;
+     }
+	
+	return false;
+	}
+	
+
+function clenup(){
+		get_element("err_name").innerHTML="";
+		
+		get_element("err_phone").innerHTML="";
+		get_element("err_email").innerHTML="";
+		
+		
+		
+
+	}
+
+</script>
+
+
 
 
 <?php include '../include/footer.php';?>

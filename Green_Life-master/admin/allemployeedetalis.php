@@ -7,6 +7,9 @@
 
 	<div style="background:radial-gradient(#fff,#197d4c);">
 		<div style="width: 900px;margin-left: 600px; ">
+			<form method="post"><input type="text" placeholder="Enter Employee name to search " name="cat_search">
+              <input type="submit" style="width: 60px;background-color:#197d4d;  " name="search" value="search">
+	          </form>
 		<a style="color: #01661a;" href='addemployee.php' >Add New Employee</a>
 		<table border="1px" style="text-align: left; margin-top: 10px; " class="table">
 			

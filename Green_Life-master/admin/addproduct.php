@@ -22,14 +22,28 @@
 			<span class="spn">Product Pic:</span> <input type="file"  name="product_pic"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_pic;?> </span><br>
 			
 			<span class="spn">Categoy</span> 
-			<select name="category">
-				<option value=""></option>
-				<option>Fish</option>
-		        <option>Meat</option>
-		        <option>Vegetable</option>
-		     
+			<select name='category'> 
+			<?php require_once '../controllers/CategoryController.php';
+               $catagories=getAllCategory();
+               foreach ($catagories as $category) {
+               	
+               
+				echo "<option id=".$category['id'].">".$category['name']."</option>";
+				     
 		      
-			</select><span style="color: red; font-size: 12;" class="spn"><?php echo $err_category;?></span><br>
+			    
+
+               }
+
+            
+               
+              
+			?> 
+		</select>
+
+           	
+			
+			<span style="color: red; font-size: 12;" class="spn"><?php echo $err_category;?></span><br>
 			<span class="spn">Product Details:</span> <textarea placeholder="add Details" name="details" style="height: 60px;width: 120px;"></textarea> <span style="color: red; font-size: 12;" class="spn"><?php echo $err_details;?> </span><br>
 			
 				

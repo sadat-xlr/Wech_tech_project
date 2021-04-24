@@ -23,7 +23,7 @@
 			
 			<span class="spn">Product Price:</span> <input type="text" value="<?php echo $product['price']?>" name="price"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_price;?> </span><br>
 		
-			<span class="spn">Product Pic:</span> <input type="file"  name="product_pic"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_pic;?> </span><br>
+			<span class="spn">Product Pic:</span> <input type="file"  name="product_pic"><span style="color: red; font-size: 12;" class="spn"><?php ?> </span><br>
 			
 			<span class="spn">Categoy</span> 
 			<select name='category' > 

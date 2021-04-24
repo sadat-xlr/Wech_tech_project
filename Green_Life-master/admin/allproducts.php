@@ -11,7 +11,7 @@
               <input type="submit" style="width: 60px;background-color:#197d4d;  " name="search" value="search">
 	          </form>
 		<a style="color: #01661a;" href='addproduct.php' >Add New Product</a>
-		<table border="1px" style="text-align: left; margin-top: 10px; " class="table">
+		<table border="1px" style="text-align: left; margin-top: 10px;" class="table" >
 			
 			<tr>
 		      
@@ -19,8 +19,9 @@
 			   <th>Price</th>
 			   <th>Category</th>
 			   <th>Details</th>
+			   <th>Picture</th>
 			 
-			   <th>Action </th>
+			   <th >Action </th>
 			  
 			  
 			   
@@ -30,17 +31,24 @@
      
   
     	
-        foreach ($products as $product) {
-        	echo "<tr>";
+        foreach ($products as $product) {?>
+        	<tr>
          	
-     	    echo "<td>".$product["name"]."</td>";
-     	    echo "<td>".$product["price"]."</td>";
-     	    echo "<td>".$product["category"]."</td>";
-     	    echo "<td>".$product["details"]."</td>";
+     	    <td><?php echo $product["name"] ;?></td>
+     	    <td><?php echo $product["price"];?></td>
+     	    <td><?php echo $product["category"];?></td>
+     	    <td><?php echo $product["details"];?></td>
+     	    <td align="center"><img src="<?php echo  '../images/'.$product["filename"];?>" style="width: 90px;height: 90px;"></td>
+     	    <?php $editlink="editproduct.php?id=".$product['id'];
+                  $deletelink="deleteproduct.php?id=".$product['id']; 
+     	    ?>
      	   
-     	    echo '<td><span><a href="editproduct.php?id='.$product["id"].'">Edit</a> | <a href="deleteproduct.php?id='.$product["id"].'" >Delete</button></a></span></td>';
-     	    echo "</tr>";
-        }
+     	    <td><span><a href="<?php echo $editlink;?>">Edit</a> | <a href="<?php echo $deletelink;?>" >Delete</a></span></td>
+     	    </tr>
+     	    <?php }?>
+
+        
+     
     	
     	
 
@@ -50,8 +58,7 @@
      
 
      
-		
-     ?>
+	
 		   
 		
 	

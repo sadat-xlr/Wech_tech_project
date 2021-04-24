@@ -12,7 +12,7 @@ $products=getAllproducts()
         
  <?php foreach($products as $product){?>
         <div class="col-4"> 
-            <img src="https://images-na.ssl-images-amazon.com/images/I/311cmr4AEIL.jpg" >
+            <img src="<?php echo  '../images/'.$product["filename"];?>" style="border-radius: 10px;" >
             <h3> <?php echo $product['name'];?></h3>
             <p><b>Price:</b><?php echo $product['price'];?></p>
             <p><b>Category:</b><?php echo $product['category'];?></p>

@@ -7,18 +7,23 @@
   $details="";
   $err_name="";
   $err_price="";
- 
+  $msg="";
   $err_category="";
   $err_details="";
   $hasError=false;
 
 
   if(isset($_POST['btn_addProduct'])){
-  	if(empty($_POST['name'])){
+      
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];    
+    $folder = "C:/xampp/htdocs/Green_Life-master/images/".$filename;
+
+    if(empty($_POST['name'])){
        $hasError=true;
        $err_name="insert name";
       
-  	}
+    }
     if(empty($_POST['price'])){
        
       $hasError=true;
@@ -36,11 +41,11 @@
 
 
 
-  	if(is_numeric($_POST['name'])){
+    if(is_numeric($_POST['name'])){
        $hasError=true;
        $err_name="insert valid name";
       
-  	}
+    }
     if(!is_numeric($_POST['price'])){
          $hasError=true;
        $err_price="insert valid price";
@@ -56,23 +61,35 @@
 
 
 
-  	if($_POST['category']==""){
-  		$hasError=true;
-  		$err_category="category not selected";
-  	}
-  	
-  	else{
-  	$name=htmlspecialchars($_POST['name']);
+    if($_POST['category']==""){
+      $hasError=true;
+      $err_category="category not selected";
+    }
+    
+    else{
+    $name=htmlspecialchars($_POST['name']);
     $price=htmlspecialchars($_POST['price']);
     $category=htmlspecialchars($_POST['category']);
-    $details=htmlspecialchars($_POST['details']);   
+    $details=htmlspecialchars($_POST['details']); 
+     
+    
    
      
 }
 if(!$hasError){
-  insertProduct($name,$price,$category,$details);
+  insertProduct($name,$price,$category,$details,$filename);
+  if (move_uploaded_file($tempname, $folder))  {
+            $msg = "Image uploaded successfully";
+        }else{
+            $msg = "Failed to upload image";
+      }
+   
+ 
   header("location:allproducts.php");
+   
+
 }
+
 
 
 
@@ -92,6 +109,7 @@ if(isset($_POST["btn_delete_product"])){
   
 
 }
+
 //cart
 
 
@@ -103,8 +121,8 @@ if(isset($_POST["btn_delete_product"])){
       return $data;
 }
 //insert product
-function insertProduct($name,$price,$category,$details){
-    $query="INSERT INTO products VALUES(NULL,'$name',$price,'$category','$details')";
+function insertProduct($name,$price,$category,$details,$filename){
+    $query="INSERT INTO products (name,price,category,details,filename) VALUES('$name',$price,'$category','$details','$filename')";
     execute($query);
     return true;
    
@@ -141,6 +159,8 @@ function insertProduct($name,$price,$category,$details){
     return false;
 
   }
+  
+
 
 
  

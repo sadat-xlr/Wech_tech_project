@@ -1,6 +1,6 @@
 <?php include '../include/header.php';?>
 
-<?php //include '../include/sidebar.php';?>
+<?php include '../include/sidebar.php';?>
 <?php require_once '../controllers/ProductController.php';?>
 
 
@@ -19,7 +19,7 @@
 			
 			<span class="spn">Product Price:</span> <input type="text" placeholder="Product price" name="price"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_price;?> </span><br>
 		
-			<span class="spn">Product Pic:</span> <input type="file"  name="product_pic"><span style="color: red; font-size: 12;" class="spn"></span><br>
+			<span class="spn">Product Pic:</span> <input type="file"  name="uploadfile" value="" ><span style="color: red; font-size: 12;" class="spn"></span><br>
 			
 			<span class="spn">Categoy</span> 
 			<select name='category'> 

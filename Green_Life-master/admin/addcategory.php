@@ -20,7 +20,7 @@
 
 			         
 			          <span>Category Name:</span>
-			          <input id="name" type="text" placeholder=" Category Name" name="name"  onfocusout="checkCategory(this)">
+			          <input id="name" type="text" placeholder=" Category Name" name="name"  onfocusout="checkCategory(this)" >
 				      <p style="color:red"><?php echo $err_name; ?></p>	<span id="err_name"></span>			      				
 				  								
 				      <button type="submit" class="btn"  name="btn_addCategory" >Add Category</button><br>
@@ -82,13 +82,13 @@ function checkCategory(control){
 			var respond=this.responseText.trim();
 			
 			if(respond=="true"){
-				cnameExists=false;
-			  get_element("err_name").innerHTML="";
+			cnameExists=false;
+			 get_element("err_name").innerHTML="";
 			}else{
-				cnameExists=true;
+			cnameExists=true;
 				
-				get_element("err_name").style.color="red";
-			    get_element("err_name").innerHTML="This category already exist";			 
+			get_element("err_name").style.color="red";
+		    get_element("err_name").innerHTML="This category already exist";			 
 
 			}
 			

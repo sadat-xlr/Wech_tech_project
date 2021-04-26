@@ -159,6 +159,13 @@ function insertProduct($name,$price,$category,$details,$filename){
     return false;
 
   }
+  //search product
+  function searchProduct($name){
+    $query="SELECT name,id from products WHERE name LIKE '$name%'";
+    $result=get_data($query);
+     return $result;
+   
+  }
   
 
 

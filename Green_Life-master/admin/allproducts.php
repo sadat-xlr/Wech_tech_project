@@ -7,11 +7,16 @@
 
 	<div style="background:radial-gradient(#fff,#197d4c);">
 		<div style="width: 950px;margin-left: 600px; ">
-			<form method="post"><input type="text" placeholder="Enter product name to search " name="cat_search">
-              <input type="submit" style="width: 60px;background-color:#197d4d;  " name="search" value="search">
+			<form method="post"><input type="text" placeholder="Enter product name to search " onkeyup="searchProduct(this)">
+				
+				<a  id="output" href=""></a>
+              <input type="submit" style="width: 60px;background-color:#197d4d;  " name="search" >
+
 	          </form>
+
 		<a style="color: #01661a;" href='addproduct.php' >Add New Product</a>
-		<table border="1px" style="text-align: left; margin-top: 10px;" class="table" >
+		<div >
+			<table border="1px" style="text-align: left; margin-top: 10px;" class="table" >
 			
 			<tr>
 		      
@@ -21,7 +26,7 @@
 			   <th>Details</th>
 			   <th>Picture</th>
 			 
-			   <th >Action </th>
+			   <th >Action/ </th>
 			  
 			  
 			   
@@ -46,7 +51,7 @@
      	    <td><span><a href="<?php echo $editlink;?>">Edit</a> | <a href="<?php echo $deletelink;?>" >Delete</a></span></td>
      	    </tr>
      	    <?php }?>
-
+           <span id="check"></span>
         
      
     	
@@ -64,7 +69,43 @@
 	
 
 		</table>
+			
+		</div>
+		
+		
+
+		
 	</div>
 	</div>
+	<script>
+	
+   function get_element(id){
+		return document.getElementById(id);
+	}
+
+
+    function searchProduct(control){
+	var productName=control.value;
+	if(productName==""){
+		get_element("output").innerHTML="";
+		return;
+	}
+	var xhttp=new XMLHttpRequest();
+	
+	xhttp.onreadystatechange=function(){
+		if(this.readyState==4 &&this.status==200){
+			get_element("output").innerHTML=this.responseText;
+			
+
+			
+		}
+
+	};
+	xhttp.open("GET","searchproduct.php?search="+productName,true);
+	xhttp.send();
+}
+
+</script>
+
 	
 <?php include '../include/footer.php';?>

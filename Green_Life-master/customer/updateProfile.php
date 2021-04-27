@@ -1,5 +1,8 @@
 <?php include '../include/header.php';?>
-<?php require_once '../controllers/UserController.php';?>
+<?php require_once '../controllers/UserController.php';
+$id=$_GET["id"];
+$user=getCustomer($id);
+?>
 
 
 
@@ -19,21 +22,21 @@
 
 					<form action="" method="post">
 			          
-			          
+			          <input type="hidden" name="id" value="<?php echo $user['id'];?>">
 			          <span>Name:</span>
-			          <input type="text" placeholder="Name" name="name" >
+			          <input type="text" placeholder="Name" name="name" value="<?php echo $user["name"]?>">
 				      <p style="color:red"><?php echo $err_name; ?></p>
 				      <span>Username:</span>
-			          <input type="text" placeholder="Username" name="username">
+			          <input type="text" placeholder="Username" name="username" value="<?php echo $user["username"]?>">
 				      <p style="color:red"><?php echo $err_username; ?></p>
 				       <span>phone No:</span>
-				      <input type="text" placeholder="phone no" name="phoneno" >
+				      <input type="text" placeholder="phone no" name="phoneno" value="<?php echo $user["phoneno"]?>">
 				      <p style="color:red"><?php echo $err_phoneno  ?></p>
 				      <span>Email:</span>
-				      <input type="text" placeholder="email" name="email" >
+				      <input type="text" placeholder="email" name="email" value="<?php echo $user["email"]?>">
 				      <p style="color:red"><?php echo $err_email; ?></p>
 				      <span>Password:</span>
-				      <input type="password" placeholder="Password" name="password">
+				      <input type="password" placeholder="Password" name="password" value="<?php echo $user["password"]?>">
 				      <p style="color:red"><?php echo $err_password; ?></p>
 			
 				

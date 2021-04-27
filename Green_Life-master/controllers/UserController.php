@@ -1,5 +1,8 @@
 <?php
   require_once '../models/db_config.php';
+  session_start();
+
+
   $name="";
 
   $err_name="";
@@ -142,12 +145,20 @@
         $err_password="please insert password";
      }
 
-     if (authenticateUser($_POST['username'],$_POST['password']) ){
+     if (authenticateUser($_POST['username'],$_POST['password'])){
        $result=authenticateUser($_POST['username'],$_POST['password']);
+      
+        
        if($result['type']=="user"){
+         $_SESSION["username"] = $result['username'];
+         $_SESSION["password"] = $result['password'];
+         $_SESSION["id"] = $result['id'];
+          
         header("Location:../customer/index.php");
        }
-        if($result['type']==""){
+        if($result['type']=="admin"){
+            
+          
         header("Location:../admin/dashboard.php");
        }
        
@@ -160,7 +171,7 @@
      
   }
 
-//update user info
+//update customer info
 if(isset($_POST['update_user'])){
   
   $name=$_POST['name'];
@@ -175,6 +186,19 @@ if(isset($_POST['update_user'])){
 if(isset($_POST['btn_deleteCustomer'])){
   deleteCustomer($_POST['id']);
   header("location:allusers.php");
+}
+
+//update user info
+
+if(isset($_POST['btn_update'])){
+  
+  $name=$_POST['name'];
+  $username=$_POST['username'];
+  $password=$_POST['password'];
+  $email=$_POST['email'];
+  $phoneno=$_POST['phoneno'];
+  editUser($_POST['id'],$name,$username,$password,$email,$phoneno);
+  header("location:../customer/index.php");
 }
 
 
@@ -199,8 +223,7 @@ function deleteCustomer($id){
       $result=get_data($query);
       if(count($result)>0)
       { 
-         /*session_start();
-         $_SESSION["success"]*/
+         
          
         return$result[0];
       }else{

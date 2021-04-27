@@ -16,6 +16,7 @@
 			          <p><span style="font-family: roboto";><?php echo $regmsg;?></span><br>
 			          
 			          <span>Name:</span>
+			          <input  type="hidden" name="type" value="user">
 			          <input id="name" type="text" placeholder="Name" name="name" >
 				      <p style="color:red"><?php echo $err_name; ?></p>
 				      <span id="err_name"></span><br>

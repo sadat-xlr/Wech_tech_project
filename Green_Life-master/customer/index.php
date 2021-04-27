@@ -1,9 +1,12 @@
 <?php include '../include/header.php'; ?> 
 <?php require_once '../controllers/ProductController.php';
+      require_once '../controllers/UserController.php';
+      
 $products=getAllproducts()
+
 ?>
 
-<div style="margin-left: 1250px;"><a href="updateProfile.php?id='.$user[0]['id'].'">Edit Profile</a></div>
+<div style="margin-left: 1250px;"><a href="updateProfile.php?id=<?php echo $_SESSION['id'];?>">Welcome,<?php echo $_SESSION["username"];?></a></div>
 <div style="background:radial-gradient(#fff,#197d4c); ">
     <div class="small-container">
          <h2>Products</h2>

@@ -99,8 +99,23 @@ if(!$hasError){
 //update product
 
 if(isset($_POST['btn_updateProduct'])){
+    
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];    
+    $folder = "C:/xampp/htdocs/Green_Life-master/images/".$filename;
+   
+    $name=htmlspecialchars($_POST['name']);
+    $price=htmlspecialchars($_POST['price']);
+    $category=htmlspecialchars($_POST['category']);
+    $details=htmlspecialchars($_POST['details']); 
 
-  editProduct($_POST['id'],$_POST['name'],$_POST['price'],$_POST['category'],$_POST['details']);
+  editProduct($_POST['id'],$name,$price,$category,$details,$filename);
+     if (move_uploaded_file($tempname, $folder))  {
+            $msg = "Image uploaded successfully";
+        }else{
+            $msg = "Failed to upload image";
+      }
+
   header("location:allproducts.php");
 }
 if(isset($_POST["btn_delete_product"])){
@@ -130,8 +145,8 @@ function insertProduct($name,$price,$category,$details,$filename){
 
 //update product 
 
-   function editProduct($id,$name,$price,$category,$details){
-    $query="update products set name='$name',price=$price,category='$category',details='$details' where id=$id";
+   function editProduct($id,$name,$price,$category,$details,$filename){
+    $query="update products set name='$name',price=$price,category='$category',details='$details',filename='$filename' where id=$id";
     $result=execute($query);
     
    }

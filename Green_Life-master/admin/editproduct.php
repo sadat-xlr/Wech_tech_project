@@ -15,7 +15,7 @@
      <div class="container">
         <div class="row">
 	  
-	       <form action="" method="post">
+	       <form action="" method="post" enctype="multipart/form-data">
 			  
 			<h2>Update Product Details</h2><br>
 			<input type="hidden" name="id" value="<?php echo $product['id'];?>">
@@ -23,7 +23,7 @@
 			
 			<span class="spn">Product Price:</span> <input type="text" value="<?php echo $product['price']?>" name="price"><span style="color: red; font-size: 12;" class="spn"><?php echo $err_price;?> </span><br>
 		
-			<span class="spn">Product Pic:</span> <input type="file"  name="product_pic"><span style="color: red; font-size: 12;" class="spn"><?php ?> </span><br>
+			<span class="spn">Product Pic:</span> <input type="file"  name="uploadfile"  value="<?php echo $product['filename']?>"><span style="color: red; font-size: 12;" class="spn"><?php ?> </span><br>
 			
 			<span class="spn">Categoy</span> 
 			<select name='category' > 
